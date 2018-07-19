@@ -1939,11 +1939,20 @@ class CommunityModelFindGolfers extends JCCModel
 
                 if($fieldcode=='FIELD_SCOREFIND')
                     $handicap=JText::_($field['value']);
+                
+                if($fieldcode=='FIELD_SEARCH')
+                    $doQuery=JText::_($field['value']);
             }
 
         }
         //echo $homegolf;
 
+        //if the preference is checked to not be notified just exit with nothing.
+       
+        if ($doQuery == "No thank you") {
+            return;
+        }
+        
         //blacklist
         $query	= 'SELECT * FROM ' . $db->quoteName('#__gwm_member_blacklist') . ' AS a '
                 .' WHERE 1 '
